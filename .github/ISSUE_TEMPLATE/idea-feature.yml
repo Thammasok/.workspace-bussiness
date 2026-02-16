@@ -1,10 +1,9 @@
 name: Idea or Feature
-about: Initial your idea or features
+description: Initial your idea or features
 title: ''
-labels: ''
+labels: ['feature']
 projects: ['Thammasok/.workspace-bussiness']
-assignees: ''
-type: feature
+assignees: []
 body:
   - type: markdown
     attributes:
