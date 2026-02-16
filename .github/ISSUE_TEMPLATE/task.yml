@@ -1,0 +1,23 @@
+name: Task
+description: Create a sub task
+title: '[Task] '
+labels: ['task']
+body:
+  - type: dropdown
+    id: task-type
+    attributes:
+      label: Task Type
+      options:
+        - feature
+        - bug
+        - improvement
+        - optimization
+    validations:
+      required: true
+
+  - type: textarea
+    id: detail
+    attributes:
+      label: Detail
+    validations:
+      required: true
