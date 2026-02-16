@@ -1,6 +1,6 @@
 name: Idea or Feature
 description: Initial your idea or features
-title: ''
+title: '[Idea/Feature]: <title>'
 labels: ['feature']
 projects: ['Thammasok/.workspace-bussiness']
 assignees: []
