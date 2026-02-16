@@ -13,7 +13,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const body = context.payload.issue.body || "";
-            const uxuiProjectId = "4";
+            const uxuiProjectId = 4;
             const issueId = context.payload.issue.node_id;
 
             try {
