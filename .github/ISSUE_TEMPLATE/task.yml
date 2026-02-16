@@ -1,17 +1,15 @@
 name: Task
 description: Create a sub task
-title: '[Task] '
-labels: ['task']
 body:
   - type: dropdown
-    id: task-type
+    id: task-assign-team
     attributes:
       label: Task Type
       options:
-        - feature
-        - bug
-        - improvement
-        - optimization
+        - ux-ui-design
+        - test-design
+        - refinement
+        - task
     validations:
       required: true
 

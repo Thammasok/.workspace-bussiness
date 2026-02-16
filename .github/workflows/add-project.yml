@@ -1,0 +1,30 @@
+name: Add project to team
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || "";
+            const uxuiProjectId = "4";
+            const issueId = context.payload.issue.node_id;
+            console.log(`issueId: ${body}`);
+            const assigness = ["ux-ui-design","test-design","refinement","task"];
+
+            await github.graphql(`
+              mutation ($uxuiProjectId:ID!, $contentId:ID!) {
+                addProjectV2ItemById(input:{
+                  projectId:$uxuiProjectId,
+                  contentId:$contentId
+                }) {
+                  item {
+                    id
+                  }
+                }
+              }
+            `, { projectId: uxuiProjectId, contentId: issueId });
