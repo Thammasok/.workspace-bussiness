@@ -10,22 +10,32 @@ jobs:
     steps:
       - uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const body = context.payload.issue.body || "";
             const uxuiProjectId = "4";
             const issueId = context.payload.issue.node_id;
 
-            console.log(`issueId: ${body}`);
-
-            await github.graphql(`
-              mutation ($uxuiProjectId:ID!, $contentId:ID!) {
-                addProjectV2ItemById(input:{
-                  projectId:$uxuiProjectId,
-                  contentId:$contentId
-                }) {
-                  item {
-                    id
+            try {
+              // เพิ่ม issue เข้า project board
+              const mutation = `
+                mutation($projectId: ID!, $contentId: ID!) {
+                  addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
+                    item {
+                      id
+                    }
                   }
                 }
-              }
-            `, { projectId: uxuiProjectId, contentId: issueId });
+              `;
+
+              const result = await github.graphql(mutation, {
+                projectId: uxuiProjectId,
+                contentId: issueId
+              });
+
+              console.log(`✅ เพิ่ม issue #${context.payload.issue.number} เข้า project สำเร็จ`);
+              console.log(`Project Item ID: ${result.addProjectV2ItemById.item.id}`);
+            } catch (error) {
+              console.error('❌ เกิดข้อผิดพลาดในการเพิ่ม issue เข้า project:', error.message);
+              core.setFailed(error.message);
+            }
