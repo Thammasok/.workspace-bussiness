@@ -7,14 +7,7 @@ body:
   - type: markdown
     attributes:
       value: Do you have any ideas? Please provide us with some ideas for new features or bug fixes.
-  - type: input
-    id: issue-title
-    attributes:
-      label: Add a title
-      description: A short title for your idea or feature request
-      placeholder: ex. Add support for dark mode
-    validations:
-      required: true
+
   - type: textarea
     id: issue-detail
     attributes:
